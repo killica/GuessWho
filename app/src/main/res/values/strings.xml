@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="title_activity_login">Login</string>
+    <string-array name="spinner_items">
+
+    </string-array>
 </resources>
