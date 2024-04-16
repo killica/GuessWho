@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow"
+    tools:context=".Login">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="296dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="79dp"
+        tools:layout_editor_absoluteY="39dp" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_below="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="50dp"
+        android:hint="Email"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:ems="10"
+        android:background="@drawable/edt_qt"/>
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_below="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:hint="Password"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:background="@drawable/edt_qt" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Log in"
+        android:background="@drawable/btn_qt"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_below="@+id/login"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="70dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="3dp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold|italic"
+        android:textColor="@color/lila"
+        android:text="New guesser?" />
+
+    <Button
+        android:id="@+id/signup"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Sign up"
+        android:background="@drawable/btn_qt"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textAllCaps="false"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "9855593699",
+    "project_id": "guess-who-89775",
+    "storage_bucket": "guess-who-89775.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9855593699:android:8261e558836cdb261ae9d6",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKY9-jbmqexRuLKvkN2bIvJ87rxprk9fc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
