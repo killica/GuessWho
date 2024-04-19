@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -48,17 +49,18 @@ class MainActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference()
 
+        playerList = ArrayList()
+        playerWelcome = findViewById(R.id.welcome)
+
         requestBtn = findViewById(R.id.requestBtn)
 
         requestList = ArrayList()
-        adapter = RequestAdapter(this, requestList)
+        adapter = RequestAdapter(this, requestList, playerList)
         requestRecyclerView = findViewById(R.id.request_list)
 
         requestRecyclerView.layoutManager = LinearLayoutManager(this)
         requestRecyclerView.adapter = adapter
 
-        playerList = ArrayList()
-        playerWelcome = findViewById(R.id.welcome)
 
         spinner = findViewById(R.id.spinner)
 
@@ -120,8 +122,33 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        mDbRef.child("request").addValueEventListener(object: ValueEventListener {
 
-        requestBtn.setOnClickListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                requestList.clear()
+                for(postSnapshot in snapshot.children) {
+                    val request = postSnapshot.getValue(Request::class.java)
+                    if (mAuth.currentUser?.uid == request?.receiverId) {
+                        requestList.add(request!!)
+                    }
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+        val handler = Handler()
+        requestBtn.setOnClickListener{
+
+            requestBtn.isEnabled = false
+
+            handler.postDelayed({
+                requestBtn.isEnabled = true
+            }, 5000)
+
             val senderId = FirebaseAuth.getInstance().currentUser?.uid
             var receiverId : String? = null
             for (player in playerList) {
@@ -130,30 +157,12 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
+
             val requestObject = Request(senderId, receiverId)
-            mDbRef.child("request").push(senderId + receiverId).setValue(requestObject)
 
-            mDbRef.child("request").child(senderId + receiverId).addValueEventListener(object: ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    requestList.clear()
-                    for(postSnapshot in snapshot.children) {
-                        val request = postSnapshot.getValue(Request::class.java)
-                        if (mAuth.currentUser?.uid == request?.receiverId) {
-                            requestList.add(request!!)
-                            Log.d(TAG, "ALO MAJMUNEEEEEEEEEEEEEEEEEEEEE")
-                        }
-                        adapter.notifyDataSetChanged()
-                    }
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-
-            })
+            mDbRef.child("request").push().setValue(requestObject)
 
         }
-
 
     }
 }

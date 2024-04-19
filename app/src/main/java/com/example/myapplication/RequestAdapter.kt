@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 
-class RequestAdapter(val context: Context, val requestList: ArrayList<Request>):
+class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, val playerList: ArrayList<Player>):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +25,15 @@ class RequestAdapter(val context: Context, val requestList: ArrayList<Request>):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val currentRequest = requestList[position]
         val viewHolder = holder as ReceiveViewHolder
-        viewHolder.receiveRequest.text = currentRequest.senderId + " sent you request!"
+        var username: String? = null
+        for(player in playerList) {
+            if(currentRequest.senderId == player.uid) {
+                username = player.username
+                break
+            }
 
+        }
+        viewHolder.receiveRequest.text = username + " sent you request!"
     }
 
     class ReceiveViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

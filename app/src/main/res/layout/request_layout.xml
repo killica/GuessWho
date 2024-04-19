@@ -11,4 +11,47 @@
         android:textSize="30dp"
         android:textStyle="bold" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/req"
+        android:layout_marginTop="10dp">
+
+
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Accept"
+            android:background="@drawable/btn3_qt"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"/>
+
+        <Button
+            android:id="@+id/decline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Decline"
+            android:background="@drawable/btn2_qt"
+            android:layout_marginRight="30dp"/>
+    </LinearLayout>
+
+
+    <!--    <Button-->
+<!--        android:id="@+id/accept"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_next="@+id/req"-->
+<!--        android:text="Button" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/decline"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Button" />-->
+
+
 </RelativeLayout>
