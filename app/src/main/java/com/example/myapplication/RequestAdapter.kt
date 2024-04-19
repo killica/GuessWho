@@ -4,11 +4,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.content.Context
 import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.google.firebase.database.DatabaseReference
 
-class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, val playerList: ArrayList<Player>):
+class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, val playerList: ArrayList<Player>, val keyList: ArrayList<String>,
+                     val mDbRef: DatabaseReference):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,14 +34,29 @@ class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, 
                 username = player.username
                 break
             }
-
         }
         viewHolder.receiveRequest.text = username + " sent you request!"
+
+//        viewHolder.accept.setOnClickListener {
+//            onDeclineClick(position)
+//        }
+
+        viewHolder.decline.setOnClickListener {
+            removeRequest(currentRequest)
+        }
+    }
+    fun removeRequest(request: Request) {
+        val position = requestList.indexOf(request)
+        if (position != -1) {
+            mDbRef.child("request").child(keyList[position]).removeValue()
+            requestList.removeAt(position)
+            notifyItemRemoved(position)
+        }
     }
 
     class ReceiveViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val receiveRequest = itemView.findViewById<TextView>(R.id.req)
-
-        // ovde obraditi i Accept/Decline dugmad
+        val accept = itemView.findViewById<Button>(R.id.accept)
+        val decline = itemView.findViewById<Button>(R.id.decline)
     }
 }

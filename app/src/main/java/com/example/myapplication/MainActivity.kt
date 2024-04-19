@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.getValue
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var requestRecyclerView: RecyclerView
     private lateinit var playerList: ArrayList<Player>
     private lateinit var requestList: ArrayList<Request>
+    private lateinit var keyList: ArrayList<String>
+//    private lateinit var acceptList: ArrayList<Button>
+//    private lateinit var declineList: ArrayList<Button>
     private lateinit var adapter: RequestAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
@@ -55,10 +59,13 @@ class MainActivity : AppCompatActivity() {
         requestBtn = findViewById(R.id.requestBtn)
 
         requestList = ArrayList()
-        adapter = RequestAdapter(this, requestList, playerList)
+        keyList = ArrayList()
+//        acceptList = ArrayList()
+//        declineList = ArrayList()
         requestRecyclerView = findViewById(R.id.request_list)
 
         requestRecyclerView.layoutManager = LinearLayoutManager(this)
+        adapter = RequestAdapter(this, requestList, playerList, keyList, mDbRef)
         requestRecyclerView.adapter = adapter
 
 
@@ -126,10 +133,13 @@ class MainActivity : AppCompatActivity() {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 requestList.clear()
+                keyList.clear()
                 for(postSnapshot in snapshot.children) {
                     val request = postSnapshot.getValue(Request::class.java)
+                    val key = postSnapshot.key
                     if (mAuth.currentUser?.uid == request?.receiverId) {
                         requestList.add(request!!)
+                        keyList.add(key!!)
                     }
                     adapter.notifyDataSetChanged()
                 }
@@ -142,26 +152,28 @@ class MainActivity : AppCompatActivity() {
         })
         val handler = Handler()
         requestBtn.setOnClickListener{
+            if(selectedValue == "Select your opponent") {
+                Toast.makeText(this@MainActivity, "Opponent not selected!", Toast.LENGTH_SHORT).show()
+            } else {
 
-            requestBtn.isEnabled = false
+                requestBtn.isEnabled = false
 
-            handler.postDelayed({
-                requestBtn.isEnabled = true
-            }, 5000)
+                handler.postDelayed({
+                    requestBtn.isEnabled = true
+                }, 5000)
 
-            val senderId = FirebaseAuth.getInstance().currentUser?.uid
-            var receiverId : String? = null
-            for (player in playerList) {
-                if (selectedValue == player.username) {
-                    receiverId = player.uid
-                    break
+                val senderId = FirebaseAuth.getInstance().currentUser?.uid
+                var receiverId : String? = null
+                for (player in playerList) {
+                    if (selectedValue == player.username) {
+                        receiverId = player.uid
+                        break
+                    }
                 }
+
+                val requestObject = Request(senderId, receiverId)
+                mDbRef.child("request").push().setValue(requestObject)
             }
-
-            val requestObject = Request(senderId, receiverId)
-
-            mDbRef.child("request").push().setValue(requestObject)
-
         }
 
     }
