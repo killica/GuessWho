@@ -35,11 +35,12 @@
         android:layout_below="@+id/welcome"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:popupTheme="@style/PopupTheme"
         android:entries="@array/spinner_items"
         />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/requestBtn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner"
@@ -51,6 +52,31 @@
         android:textStyle="bold"
         android:textSize="18dp"
         android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/myReq"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/requestBtn"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="My requests" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/request_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/myReq"
+        android:background="@drawable/request_list_qt"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:paddingLeft = "15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="20dp"
+        />
 
 
 </RelativeLayout>
