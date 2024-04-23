@@ -1,8 +1,13 @@
 package com.example.myapplication
 
+
+import android.content.ContentValues.TAG
 import android.view.View
 import android.view.ViewGroup
 import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.TextView
@@ -13,6 +18,7 @@ import com.google.firebase.database.DatabaseReference
 class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, val playerList: ArrayList<Player>, val keyList: ArrayList<String>,
                      val mDbRef: DatabaseReference):
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -37,14 +43,43 @@ class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, 
         }
         viewHolder.receiveRequest.text = username + " sent you request!"
 
-//        viewHolder.accept.setOnClickListener {
-//            onDeclineClick(position)
-//        }
+        viewHolder.accept.setOnClickListener {
+            acceptRequest(currentRequest)
+        }
 
         viewHolder.decline.setOnClickListener {
             removeRequest(currentRequest)
         }
     }
+
+    private fun acceptRequest(currentRequest: Request) {
+        val position = requestList.indexOf(currentRequest)
+        if(position != -1) {
+            var opponentUsername: String? = null
+            for(player in playerList) {
+                if(currentRequest.senderId == player.uid) {
+                    opponentUsername = player.username
+                    break
+                }
+            }
+            val intent = Intent(context, GameActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("op", "Opponent: " + opponentUsername)
+            context.startActivity(intent)
+
+//            mDbRef.child("request").child(keyList[position]).removeValue()
+//            requestList.removeAt(position)
+//            notifyItemRemoved(position)
+
+            // mi smo ovde receiver
+            val dialogObject = Accept(currentRequest.receiverId, currentRequest.senderId) // receiver-a -> sender-a
+            mDbRef.child("accept").push().setValue(dialogObject)
+
+        }
+    }
+
+
+
+
     fun removeRequest(request: Request) {
         val position = requestList.indexOf(request)
         if (position != -1) {

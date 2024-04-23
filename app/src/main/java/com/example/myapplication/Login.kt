@@ -65,6 +65,7 @@ class Login : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val intent = Intent(this@Login , MainActivity::class.java)
                     startActivity(intent)
+
                 } else {
                     Toast.makeText(this@Login, "User not found", Toast.LENGTH_SHORT).show()
                 }

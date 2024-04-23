@@ -12,6 +12,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -39,6 +40,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RequestAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
+    private var start: Boolean = false
+    private var senderId: String? = null
+    private var receiverId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference()
+
 
         playerList = ArrayList()
         playerWelcome = findViewById(R.id.welcome)
@@ -150,6 +155,47 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+        mDbRef.child("accept").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // pretrazujemo da li je nama neko prihvatio zahtev za igru i prikazujemo iskacuci prozor ako jeste
+                for(postSnapshot in snapshot.children) {
+                    val accept = postSnapshot.getValue(Accept::class.java)
+                    if (mAuth.currentUser?.uid == accept?.receiverId) {
+                        val builder = AlertDialog.Builder(this@MainActivity)
+                        var accepterUsername: String? = null
+                        for(player in playerList) {
+                            if(accept!!.senderId == player.uid) {
+                                accepterUsername = player.username
+                                break
+                            }
+                        }
+                        builder.setTitle("Challenge accepted!")
+                        builder.setMessage(accepterUsername + " accepted your request!")
+                        builder.setPositiveButton("Accept") { dialog, which ->
+                            start = true
+                            senderId = accept!!.senderId
+                            receiverId = accept.receiverId
+                        }
+//                        builder.setNegativeButton("Decline") { dialog, which ->
+//
+//                        }
+                        val dialog = builder.create()
+                        dialog.show()
+
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+        if(start) {
+            val gameObject = Game(senderId, receiverId)
+            mDbRef.child("game").push().setValue(gameObject)
+        }
         val handler = Handler()
         requestBtn.setOnClickListener{
             if(selectedValue == "Select your opponent") {
