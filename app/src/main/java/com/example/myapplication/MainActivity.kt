@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -171,9 +172,9 @@ class MainActivity : AppCompatActivity() {
                         builder.setPositiveButton("Accept") { dialog, which ->
                             // treba izbrisati ovaj objekat iz baze
                             mDbRef.child("accept").child(postSnapshot.key!!).removeValue()
-                            val gameObject = Game(accept!!.senderId,  accept.receiverId)
-                            Log.d(TAG, gameObject.toString())
-                            mDbRef.child("game").push().setValue(gameObject)
+                            val intent = Intent(this@MainActivity, GameActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            intent.putExtra("op", "Opponent: " + accept!!.senderId)
+                            startActivity(intent)
                         }
 //                        builder.setNegativeButton("Decline") { dialog, which ->
 //
