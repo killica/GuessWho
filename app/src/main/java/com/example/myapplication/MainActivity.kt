@@ -40,9 +40,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RequestAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
-    private var start: Boolean = false
-    private var senderId: String? = null
-    private var receiverId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -172,9 +169,11 @@ class MainActivity : AppCompatActivity() {
                         builder.setTitle("Challenge accepted!")
                         builder.setMessage(accepterUsername + " accepted your request!")
                         builder.setPositiveButton("Accept") { dialog, which ->
-                            start = true
-                            senderId = accept!!.senderId
-                            receiverId = accept.receiverId
+                            // treba izbrisati ovaj objekat iz baze
+                            mDbRef.child("accept").child(postSnapshot.key!!).removeValue()
+                            val gameObject = Game(accept!!.senderId,  accept.receiverId)
+                            Log.d(TAG, gameObject.toString())
+                            mDbRef.child("game").push().setValue(gameObject)
                         }
 //                        builder.setNegativeButton("Decline") { dialog, which ->
 //
@@ -192,10 +191,7 @@ class MainActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-        if(start) {
-            val gameObject = Game(senderId, receiverId)
-            mDbRef.child("game").push().setValue(gameObject)
-        }
+
         val handler = Handler()
         requestBtn.setOnClickListener{
             if(selectedValue == "Select your opponent") {
