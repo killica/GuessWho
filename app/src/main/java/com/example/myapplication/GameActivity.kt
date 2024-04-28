@@ -44,6 +44,7 @@ class GameActivity : AppCompatActivity() {
         opLabel.text = intent.getStringExtra("op")
 
         var image: ImageView = findViewById(R.id.card)
+        var text: TextView = findViewById(R.id.tv)
         var gameObjRef = intent.getStringExtra("gameObj")
 
 
@@ -176,7 +177,48 @@ class GameActivity : AppCompatActivity() {
             "name22" to R.id.name22,
             "name23" to R.id.name23,
         )
-
+        val characterNamesMap = mapOf(
+            "n0" to "Marjan",
+            "n1" to "Marta",
+            "n2" to "Petar",
+            "n3" to "Andjelka",
+            "n4" to "Kloi",
+            "n5" to "Marko",
+            "n6" to "Tijana",
+            "n7" to "Stela",
+            "n8" to "Glorija",
+            "n9" to "Filip",
+            "n10" to "Mila",
+            "n11" to "Vanja",
+            "n12" to "Kristofer",
+            "n13" to "Noa",
+            "n14" to "Pavle",
+            "n15" to "Ilija",
+            "n16" to "Sabrina",
+            "n17" to "Mej",
+            "n18" to "Dzekson",
+            "n19" to "Ara",
+            "n20" to "Aron",
+            "n21" to "Teo",
+            "n22" to "Stojadin",
+            "n23" to "Mitar",
+            "n24" to "Gavrilo",
+            "n25" to "Lejla",
+            "n26" to "Sheli",
+            "n27" to "Teodora",
+            "n28" to "Ana",
+            "n29" to "Luk",
+            "n30" to "Aiko",
+            "n31" to "Dzastin",
+            "n32" to "Brendon",
+            "n33" to "Aleks",
+            "n34" to "Nejtn",
+            "n35" to "Milutin",
+            "n36" to "Klara",
+            "n37" to "Bojana",
+            "n38" to "Miljana",
+            "n39" to "Isak",
+        )
         mDbRef.child("game").child(gameObjRef!!)
             .get()
             .addOnSuccessListener { snapshot ->
@@ -190,13 +232,17 @@ class GameActivity : AppCompatActivity() {
                 val player2card = gameObj.player2image
                 if (mAuth.currentUser!!.uid == gameObj.player1) {
                     var resourceName1 = "s$player1card"
+                    var characterName1 = "n$player1card"
                     var resId1 = drawableMap[resourceName1]
                     image.setImageResource(resId1!!)
+                    text.text = characterNamesMap[characterName1]
+
                 } else {
                     var resourceName2 = "s$player2card"
+                    var characterName2 = "n$player2card"
                     var resId2 = drawableMap[resourceName2]
                     image.setImageResource(resId2!!)
-
+                    text.text = characterNamesMap[characterName2]
                 }
                 gameObj.finish = snapshot.child("finish").value as Long
                 gameObj.imageIndices = snapshot.child("imageIndices").value as List<Long>
@@ -206,11 +252,12 @@ class GameActivity : AppCompatActivity() {
                     val nameKey = "name$i"
                     val ind = gameObj.imageIndices.get(i)
                     val resKey = "s$ind"
+                    val characterNameKey = "n$ind"
                     var cardView : CardView = findViewById(cardsMap[cardKey]!!)
                     var pictureView: ImageView = findViewById(pictureMap[pictureKey]!!)
                     pictureView.setImageResource(drawableMap[resKey]!!)
                     var textView : TextView = findViewById(nameMap[nameKey]!!)
-                    textView.text = "Anastasija"
+                    textView.text = characterNamesMap[characterNameKey]
                 }
             }
             .addOnFailureListener { exception ->
