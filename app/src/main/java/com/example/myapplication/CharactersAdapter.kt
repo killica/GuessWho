@@ -14,6 +14,7 @@ class CharactersAdapter(val context: Context, val charactersList: List<Long>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(context).inflate(R.layout.characters_layout, parent, false)
         return CharacterViewHolder(view)
+
     }
 
     class CharacterViewHolder(view: View): RecyclerView.ViewHolder(view) {
