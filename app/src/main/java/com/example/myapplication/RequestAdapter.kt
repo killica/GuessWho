@@ -62,17 +62,19 @@ class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, 
                     break
                 }
             }
+            val gameObject = Game(currentRequest.senderId, currentRequest.receiverId)
+            var gameRef = mDbRef.child("game").push()
+            gameRef.setValue(gameObject)
+
             val intent = Intent(context, GameActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("op", "Opponent: " + opponentUsername)
+            intent.putExtra("gameObj", gameRef.key)
             context.startActivity(intent)
 
             mDbRef.child("request").child(keyList[position]).removeValue()
             requestList.removeAt(position)
             notifyItemRemoved(position)
 
-            val gameObject = Game(currentRequest.senderId, currentRequest.receiverId)
-            var gameRef = mDbRef.child("game").push()
-            gameRef.setValue(gameObject)
             // mi smo ovde receiver
             val dialogObject = Accept(currentRequest.receiverId, currentRequest.senderId, gameRef.key) // receiver-a -> sender-a
             mDbRef.child("accept").push().setValue(dialogObject)

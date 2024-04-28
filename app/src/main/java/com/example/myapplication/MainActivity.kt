@@ -173,7 +173,8 @@ class MainActivity : AppCompatActivity() {
                             // treba izbrisati ovaj objekat iz baze
                             mDbRef.child("accept").child(postSnapshot.key!!).removeValue()
                             val intent = Intent(this@MainActivity, GameActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            intent.putExtra("op", "Opponent: " + accept!!.senderId)
+                            intent.putExtra("op", "Opponent: " + accepterUsername)
+                            intent.putExtra("gameObj", accept!!.gameRef)
                             startActivity(intent)
                         }
 //                        builder.setNegativeButton("Decline") { dialog, which ->
