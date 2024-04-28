@@ -34,8 +34,6 @@ class GameActivity : AppCompatActivity() {
         opLabel.text = intent.getStringExtra("op")
 
         val image : ImageView = findViewById(R.id.card)
-        //image.setImageResource(R.drawable.s38)
-
         var gameObjRef = intent.getStringExtra("gameObj")
 
 
