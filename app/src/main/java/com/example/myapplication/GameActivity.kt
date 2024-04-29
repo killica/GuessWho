@@ -1,6 +1,8 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,13 +12,17 @@ import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.PopupWindow
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.compose.ui.layout.Layout
@@ -253,6 +259,53 @@ class GameActivity : AppCompatActivity() {
                     text.text = characterNamesMap[characterName2]
                 }
                 gameObj.finish = snapshot.child("finish").value as Long
+                mDbRef.child("game").child(gameObjRef).child("finish").addValueEventListener(object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        Log.d(TAG, "I IMAMO POBEDNIKA!" + snapshot.value.toString())
+                        if(snapshot.value.toString() == "1" || snapshot.value.toString() == "2") {
+                            val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val popupView = inflater.inflate(R.layout.popup_layout, null)
+
+                            val width = LinearLayout.LayoutParams.WRAP_CONTENT
+                            val height = LinearLayout.LayoutParams.WRAP_CONTENT
+                            val focusable = false
+                            val popupWindow = PopupWindow(popupView, width, height, focusable)
+
+                            popupWindow.animationStyle = R.style.PopupAnimation
+                            val winnerInfo = popupView.findViewById<TextView>(R.id.info)
+                            if(snapshot.value.toString() == "1") {
+                                if (mAuth.currentUser!!.uid == gameObj.player1) {
+                                    // mi smo pobedili
+                                    winnerInfo.text = "Congratulations! You won!"
+                                } else {
+                                    //mi smo izgubili
+                                    winnerInfo.text = "Better luck next time :("
+                                }
+                            } else {
+                                if (mAuth.currentUser!!.uid == gameObj.player2) {
+                                    // mi smo pobedili
+                                    winnerInfo.text = "Congratulations! You won!"
+                                } else {
+                                    //mi smo izgubili
+                                    winnerInfo.text = "Better luck next time :("
+                                }
+                            }
+                            val closeButton = popupView.findViewById<Button>(R.id.end_game)
+                            closeButton.setOnClickListener {
+                                popupWindow.dismiss()
+                            }
+                            popupWindow.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Log.d(TAG, "Nista")
+                    }
+
+                })
+
+
+
                 gameObj.imageIndices = snapshot.child("imageIndices").value as List<Long>
                 val flipped = BooleanArray(24)
                 for(i in 0 until 24) {
@@ -303,7 +356,6 @@ class GameActivity : AppCompatActivity() {
                                         mDbRef.child("game").child(gameObjRef).child("finish").setValue(gameObj.finish)
                                             .addOnSuccessListener {
                                                 Log.d(TAG, "Uspesno azurirana vrednost FINISHA")
-                                                Log.d(TAG, gameObj.finish.toString())
                                             }
                                             .addOnFailureListener {
                                                 Log.d(TAG, "Neuspesno azurirana vrednost FINISHA")
@@ -341,8 +393,6 @@ class GameActivity : AppCompatActivity() {
                                         mDbRef.child("game").child(gameObjRef).child("finish").setValue(gameObj.finish)
                                             .addOnSuccessListener {
                                                 Log.d(TAG, "Uspesno azurirana vrednost FINISHA")
-                                                Log.d(TAG, gameObj.finish.toString())
-
                                             }
                                             .addOnFailureListener {
                                                 Log.d(TAG, "Neuspesno azurirana vrednost FINISHA")
