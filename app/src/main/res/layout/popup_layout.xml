@@ -17,7 +17,7 @@
         android:background="@color/white"
         android:textColor="#C04000"
         android:textStyle="bold"
-        android:fontFamily="@font/COMICSANS"
+        android:fontFamily="@font/comicsans"
         android:paddingBottom="8dp"/>
 
     <Button
