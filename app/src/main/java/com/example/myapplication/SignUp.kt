@@ -10,8 +10,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class SignUp : AppCompatActivity() {
 
@@ -39,8 +42,8 @@ class SignUp : AppCompatActivity() {
         btnRegister = findViewById(R.id.register)
 
         btnRegister.setOnClickListener {
-            val username = edtUsername.text.toString()
-            val email = edtEmail.text.toString()
+            val username = edtUsername.text.toString().trim()
+            val email = edtEmail.text.toString().trim()
             val password = edtPassword.text.toString()
 
             signUp(username, email, password)
@@ -65,7 +68,23 @@ class SignUp : AppCompatActivity() {
 
     private fun addPlayerToDatabase(username: String, email: String, uid: String) {
         mDbRef = FirebaseDatabase.getInstance().getReference()
-        mDbRef.child("player").child(uid).setValue(Player(username, email, uid))
+        val usersRef = FirebaseDatabase.getInstance().getReference("users")
+
+        usersRef.orderByChild("username").equalTo(username).addListenerForSingleValueEvent(object :
+            ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Toast.makeText(this@SignUp, "Username not available!", Toast.LENGTH_SHORT).show()
+                } else {
+                    mDbRef.child("player").child(uid).setValue(Player(username, email, uid))
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+
+            }
+        })
+
+
     }
 
 }

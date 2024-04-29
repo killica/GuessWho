@@ -44,7 +44,7 @@ class Login : AppCompatActivity() {
         }
 
         btnLogin.setOnClickListener {
-            val email = edtEmail.text.toString()
+            val email = edtEmail.text.toString().trim()
             val password = edtPassword.text.toString()
 
             if(email == "") {

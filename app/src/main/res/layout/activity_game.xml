@@ -15,7 +15,8 @@
         android:textAlignment="center"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/lila"
+        android:textColor="#C04000"
+        android:fontFamily="@font/COMICSANS"
         android:text="" />
 
     <androidx.cardview.widget.CardView
@@ -102,7 +103,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -141,7 +142,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -180,7 +181,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -220,7 +221,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -259,7 +260,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -298,7 +299,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -338,7 +339,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -377,7 +378,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -416,7 +417,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -456,7 +457,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -495,7 +496,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -534,7 +535,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -573,7 +574,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -612,7 +613,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -651,7 +652,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -691,7 +692,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -730,7 +731,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -769,7 +770,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -808,7 +809,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -847,7 +848,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -886,7 +887,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -926,7 +927,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -965,7 +966,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 
@@ -1004,7 +1005,7 @@
                     android:textAlignment="center"
                     android:textStyle="bold"
                     android:textSize="18dp"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/COMICSANS"
                     />
             </LinearLayout>
 

@@ -42,8 +42,6 @@ import com.google.firebase.database.ValueEventListener
 
 class GameActivity : AppCompatActivity() {
 
-    private lateinit var charactersRecyclerView: RecyclerView
-    private lateinit var adapter: CharactersAdapter
     private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -278,18 +276,18 @@ class GameActivity : AppCompatActivity() {
                             if(snapshot.value.toString() == "1") {
                                 if (mAuth.currentUser!!.uid == gameObj.player1) {
                                     // mi smo pobedili
-                                    winnerInfo.text = "Congratulations! You won!"
+                                    winnerInfo.text = "Congratulations!\nYou won!"
                                 } else {
                                     //mi smo izgubili
-                                    winnerInfo.text = "Better luck next time :("
+                                    winnerInfo.text = "Better luck\nnext time... :("
                                 }
                             } else {
                                 if (mAuth.currentUser!!.uid == gameObj.player2) {
                                     // mi smo pobedili
-                                    winnerInfo.text = "Congratulations! You won!"
+                                    winnerInfo.text = "Congratulations!\nYou won!"
                                 } else {
                                     //mi smo izgubili
-                                    winnerInfo.text = "Better luck next time :("
+                                    winnerInfo.text = "Better luck\nnext time... :("
                                 }
                             }
                             val backButton = popupView.findViewById<Button>(R.id.end_game)

@@ -17,26 +17,21 @@
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:textSize="40dp"
+        android:fontFamily="@font/COMICSANS"
         android:textStyle="bold|italic"
-        android:textColor="@color/gold"
+        android:textColor="#C04000"
          />
-
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/playerRecyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/welcome"-->
-<!--        android:layout_marginTop="0dp"-->
-<!--        tools:listitem="@layout/player_layout"-->
-<!--        />-->
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_below="@+id/welcome"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:popupTheme="@style/PopupTheme"
+        android:layout_width="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_height="30dp"
+        android:background="@drawable/spinner_background"
         android:entries="@array/spinner_items"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         />
 
     <Button
@@ -61,6 +56,8 @@
         android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:fontFamily="@font/COMICSANS"
+        android:textColor="#FFAA33"
         android:text="My requests" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -85,6 +82,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_qt"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
         android:text="Log out" />
 
 </RelativeLayout>
