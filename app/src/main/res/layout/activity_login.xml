@@ -45,7 +45,8 @@
         android:layout_marginRight="15dp"
         android:inputType="textPassword"
         android:ems="10"
-        android:background="@drawable/edt_qt" />
+        android:background="@drawable/edt_qt"
+        />
 
     <Button
         android:id="@+id/login"
@@ -55,7 +56,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Log in"
-        android:background="@drawable/btn_qt"
+        android:background="@drawable/login_btn_qt"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="18dp"
@@ -73,7 +74,7 @@
         android:textAlignment="center"
         android:textSize="18dp"
         android:textStyle="bold|italic"
-        android:textColor="@color/lila"
+        android:textColor="#FFAA33"
         android:text="New guesser?" />
 
     <Button
@@ -84,7 +85,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:text="Sign up"
-        android:background="@drawable/btn_qt"
+        android:background="@drawable/login_btn_qt"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="18dp"

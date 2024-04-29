@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:text="Testic"
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/comicsans"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -25,7 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Accept"
-            android:background="@drawable/btn3_qt"
+            android:fontFamily="@font/comicsans"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/btn1_qt"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"/>
 
@@ -35,7 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Decline"
-            android:background="@drawable/btn2_qt"
+            android:fontFamily="@font/comicsans"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_qt"
             android:layout_marginRight="30dp"/>
     </LinearLayout>
 
