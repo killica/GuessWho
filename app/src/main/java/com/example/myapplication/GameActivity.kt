@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -48,6 +49,7 @@ class GameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_game)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -290,9 +292,21 @@ class GameActivity : AppCompatActivity() {
                                     winnerInfo.text = "Better luck next time :("
                                 }
                             }
-                            val closeButton = popupView.findViewById<Button>(R.id.end_game)
-                            closeButton.setOnClickListener {
+                            val backButton = popupView.findViewById<Button>(R.id.end_game)
+                            backButton.setOnClickListener {
                                 popupWindow.dismiss()
+                                mDbRef.child("game").child(gameObjRef).removeValue().addOnCompleteListener { task ->
+                                    if (task.isSuccessful) {
+                                        val intent = Intent(this@GameActivity, MainActivity::class.java)
+                                        startActivity(intent)
+                                        finish()
+
+                                    } else {
+
+                                    }
+                                }
+
+
                             }
                             popupWindow.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
                         }
@@ -416,6 +430,11 @@ class GameActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error", exception)
             }
+
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
 
     }
 

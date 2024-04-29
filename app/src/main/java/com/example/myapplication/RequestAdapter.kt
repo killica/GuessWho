@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.view.View
 import android.view.ViewGroup
@@ -66,11 +67,13 @@ class RequestAdapter(val context: Context, val requestList: ArrayList<Request>, 
             var gameRef = mDbRef.child("game").push()
             gameRef.setValue(gameObject)
 
+
+
             val intent = Intent(context, GameActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra("op", "Opponent: " + opponentUsername)
             intent.putExtra("gameObj", gameRef.key)
             context.startActivity(intent)
-
+            (context as Activity).finish()
             mDbRef.child("request").child(keyList[position]).removeValue()
             requestList.removeAt(position)
             notifyItemRemoved(position)

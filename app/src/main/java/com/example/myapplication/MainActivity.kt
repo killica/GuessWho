@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
@@ -51,7 +52,6 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
         mAuth = FirebaseAuth.getInstance()
         mDbRef = FirebaseDatabase.getInstance().getReference()
 
@@ -68,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         requestRecyclerView = findViewById(R.id.request_list)
 
         requestRecyclerView.layoutManager = LinearLayoutManager(this)
+
+
         adapter = RequestAdapter(this, requestList, playerList, keyList, mDbRef)
         requestRecyclerView.adapter = adapter
 
@@ -176,12 +178,17 @@ class MainActivity : AppCompatActivity() {
                             intent.putExtra("op", "Opponent: " + accepterUsername)
                             intent.putExtra("gameObj", accept!!.gameRef)
                             startActivity(intent)
+                            finish()
                         }
 //                        builder.setNegativeButton("Decline") { dialog, which ->
 //
 //                        }
                         val dialog = builder.create()
-                        dialog.show()
+                        if (!this@MainActivity.isFinishing) {
+                            // Prikazivanje dijaloga
+                            dialog.show()
+                        }
+
 
                     }
 
@@ -218,7 +225,9 @@ class MainActivity : AppCompatActivity() {
                 val requestObject = Request(senderId, receiverId)
                 mDbRef.child("request").push().setValue(requestObject)
             }
+
         }
+
 
     }
 }
