@@ -44,6 +44,7 @@ class SignUp : AppCompatActivity() {
             val password = edtPassword.text.toString()
 
             signUp(username, email, password)
+
         }
 
     }
@@ -54,6 +55,7 @@ class SignUp : AppCompatActivity() {
                 if (task.isSuccessful) {
                     addPlayerToDatabase(username, email, mAuth.currentUser?.uid!!);
                     val intent = Intent(this@SignUp, Login::class.java)
+                    finish()
                     startActivity(intent)
                 } else {
                     Toast.makeText(this@SignUp, "Error", Toast.LENGTH_SHORT).show()

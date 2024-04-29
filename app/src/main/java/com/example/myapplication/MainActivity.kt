@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: RequestAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
+    private lateinit var logoutButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +90,13 @@ class MainActivity : AppCompatActivity() {
         //playerRecyclerView = findViewById(R.id.playerRecyclerView)
         //playerRecyclerView.layoutManager = LinearLayoutManager(this)
         //playerRecyclerView.adapter = adapter
+
+        logoutButton = findViewById(R.id.logout)
+        logoutButton.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         mDbRef.child("player").addValueEventListener(object: ValueEventListener {
@@ -228,6 +237,10 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
+    }
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
 
     }
 }
