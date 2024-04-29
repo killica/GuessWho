@@ -27,8 +27,11 @@ import androidx.core.view.setMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class GameActivity : AppCompatActivity() {
 
@@ -251,6 +254,7 @@ class GameActivity : AppCompatActivity() {
                 }
                 gameObj.finish = snapshot.child("finish").value as Long
                 gameObj.imageIndices = snapshot.child("imageIndices").value as List<Long>
+                val flipped = BooleanArray(24)
                 for(i in 0 until 24) {
                     val cardKey = "card$i"
                     val pictureKey = "picture$i"
@@ -268,6 +272,7 @@ class GameActivity : AppCompatActivity() {
 
                     cardView.setOnClickListener {
                         //Toast.makeText(this@GameActivity, "CardView" + i + "Clicked", Toast.LENGTH_SHORT).show()
+                        flipped[i] = true
                         pictureView.setImageResource(R.drawable.logo)
                         val spannableString = SpannableString(chName)
                         spannableString.setSpan(StrikethroughSpan(), 0, chName!!.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -278,10 +283,81 @@ class GameActivity : AppCompatActivity() {
 
                         if (mAuth.currentUser!!.uid == gameObj.player1) {
                             // prvom igracu povecaj ili smanji
-                            
+                            gameObj.cardsDown1 = gameObj.cardsDown1 + 1
+                            if(gameObj.cardsDown1 == 23L) {
+                                for(j in 0 until 24) {
+                                    if(!flipped[j]) {
+                                        val ind1 = gameObj.imageIndices.get(j)
+                                        val characterNameKey1 = "n$ind1"
+                                        val lastName = characterNamesMap[characterNameKey1]
+
+                                        val opponentCard = gameObj.player2image
+                                        val opponentCardName = "n$opponentCard"
+                                        val opponentCharacterName = characterNamesMap[opponentCardName]
+
+                                        if(lastName == opponentCharacterName) {
+                                            gameObj.finish = 1
+                                        } else {
+                                            gameObj.finish = 2
+                                        }
+                                        mDbRef.child("game").child(gameObjRef).child("finish").setValue(gameObj.finish)
+                                            .addOnSuccessListener {
+                                                Log.d(TAG, "Uspesno azurirana vrednost FINISHA")
+                                                Log.d(TAG, gameObj.finish.toString())
+                                            }
+                                            .addOnFailureListener {
+                                                Log.d(TAG, "Neuspesno azurirana vrednost FINISHA")
+                                            }
+                                    }
+                                }
+                            }
+                            mDbRef.child("game").child(gameObjRef).child("cardsDown1").setValue(gameObj.cardsDown1)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "Uspesno azurirana vrednost")
+                                }
+                                .addOnFailureListener {
+                                    Log.d(TAG, "Neuspesno azurirana vrednost")
+                                }
 
                         } else {
                             // drugom igracu povecaj ili smanji
+                            gameObj.cardsDown2 = gameObj.cardsDown2 + 1
+                            if(gameObj.cardsDown2 == 23L) {
+                                for(j in 0 until 24) {
+                                    if(!flipped[j]) {
+                                        val ind1 = gameObj.imageIndices.get(j)
+                                        val characterNameKey1 = "n$ind1"
+                                        val lastName = characterNamesMap[characterNameKey1]
+
+                                        val opponentCard = gameObj.player1image
+                                        val opponentCardName = "n$opponentCard"
+                                        val opponentCharacterName = characterNamesMap[opponentCardName]
+
+                                        if(lastName == opponentCharacterName) {
+                                            gameObj.finish = 2
+                                        } else {
+                                            gameObj.finish = 1
+                                        }
+                                        mDbRef.child("game").child(gameObjRef).child("finish").setValue(gameObj.finish)
+                                            .addOnSuccessListener {
+                                                Log.d(TAG, "Uspesno azurirana vrednost FINISHA")
+                                                Log.d(TAG, gameObj.finish.toString())
+
+                                            }
+                                            .addOnFailureListener {
+                                                Log.d(TAG, "Neuspesno azurirana vrednost FINISHA")
+                                            }
+
+                                    }
+                                }
+                            }
+                            mDbRef.child("game").child(gameObjRef).child("cardsDown2").setValue(gameObj.cardsDown2)
+                                .addOnSuccessListener {
+                                    Log.d(TAG, "Uspesno azurirana vrednost")
+                                }
+                                .addOnFailureListener {
+                                    Log.d(TAG, "Neuspesno azurirana vrednost")
+                                }
                         }
                     }
 
@@ -290,12 +366,6 @@ class GameActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.e(TAG, "Error", exception)
             }
-
-//        charactersRecyclerView = findViewById(R.id.characters_list)
-//        charactersRecyclerView.layoutManager = LinearLayoutManager(this)
-//        adapter = CharactersAdapter(this, gameObj.imageIndices)
-//        charactersRecyclerView.adapter = adapter
-
 
     }
 
