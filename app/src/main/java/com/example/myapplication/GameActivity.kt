@@ -1,8 +1,12 @@
 package com.example.myapplication
 
 import android.content.ContentValues.TAG
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
@@ -11,6 +15,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
@@ -257,7 +262,29 @@ class GameActivity : AppCompatActivity() {
                     var pictureView: ImageView = findViewById(pictureMap[pictureKey]!!)
                     pictureView.setImageResource(drawableMap[resKey]!!)
                     var textView : TextView = findViewById(nameMap[nameKey]!!)
-                    textView.text = characterNamesMap[characterNameKey]
+                    var chName : String? = characterNamesMap[characterNameKey]
+                    textView.text = chName
+                    textView.setTextColor(Color.DKGRAY)
+
+                    cardView.setOnClickListener {
+                        //Toast.makeText(this@GameActivity, "CardView" + i + "Clicked", Toast.LENGTH_SHORT).show()
+                        pictureView.setImageResource(R.drawable.logo)
+                        val spannableString = SpannableString(chName)
+                        spannableString.setSpan(StrikethroughSpan(), 0, chName!!.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        textView.text = spannableString
+                        textView.setTextColor(Color.rgb(255, 215, 0))
+                        cardView.setOnClickListener(null)
+                        //cardView.setBackgroundResource(R.drawable.back)
+
+                        if (mAuth.currentUser!!.uid == gameObj.player1) {
+                            // prvom igracu povecaj ili smanji
+                            
+
+                        } else {
+                            // drugom igracu povecaj ili smanji
+                        }
+                    }
+
                 }
             }
             .addOnFailureListener { exception ->
