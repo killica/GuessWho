@@ -8,6 +8,6 @@ The goal is to narrow down the choice of possible characters by asking the oppon
 The entire application has been written in Kotlin in the Android Studio IDE.\
 For data storage, Firebase Realtime Database has been used.
 # About authors
-Đurđa Milošević - djuki0904@gmail.com
-Iva Milutinović - ivaivce76@gmail.com
+Đurđa Milošević - djuki0904@gmail.com\
+Iva Milutinović - ivaivce76@gmail.com\
 Lazar Savić - lazarsavic2003@gmail.com
