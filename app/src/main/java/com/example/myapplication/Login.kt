@@ -2,6 +2,10 @@ package com.example.myapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -36,6 +40,30 @@ class Login : AppCompatActivity() {
         edtPassword = findViewById(R.id.password)
         btnLogin = findViewById(R.id.login)
         btnSignup = findViewById(R.id.signup)
+        var passwordVisible = false
+        edtPassword.setOnTouchListener(object: View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                val Right = 2
+                if(event!!.action == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= edtPassword.right - edtPassword.compoundDrawables[Right].bounds.width()) {
+                        var selection = edtPassword.selectionEnd
+                        if(passwordVisible) {
+                            edtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_key_24, 0)
+                            edtPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                            passwordVisible = false
+                        } else {
+                            edtPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.baseline_key_off_24, 0)
+                            edtPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                            passwordVisible = true
+                        }
+                        edtPassword.setSelection(selection)
+                        return true
+                    }
+                }
+
+                return false
+            }
+        })
 
         btnSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)

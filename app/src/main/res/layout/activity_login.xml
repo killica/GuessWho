@@ -38,6 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="#FFAA33"
         android:hint="Password"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -45,8 +47,10 @@
         android:layout_marginRight="15dp"
         android:inputType="textPassword"
         android:ems="10"
-        android:background="@drawable/edt_qt"
-        />
+        android:drawableRight="@drawable/baseline_key_24"
+        android:longClickable="false"
+        android:background="@drawable/edt_qt" >
+    </EditText>
 
     <Button
         android:id="@+id/login"
