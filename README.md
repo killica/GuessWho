@@ -1,5 +1,5 @@
 # GUESS WHO?
-Guess who? - a well known board game, now in digital form.\ 
+Guess who? - a well known board game, now in digital form.\
 Designed for course Programming Language Paradigms
 # Rules
 Both players are given the same set of cards, and each player is assigned a character.\
