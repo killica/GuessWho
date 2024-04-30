@@ -66,8 +66,6 @@ class GameActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         var gameObj: Game = Game()
 
-        //var scrollLayout: ScrollView = findViewById(R.id.scroll_view)
-        //var gridLayout : GridLayout = findViewById(R.id.characters)
 
         val drawableMap = mapOf(
             "s0" to R.drawable.s0,
@@ -336,7 +334,6 @@ class GameActivity : AppCompatActivity() {
                     textView.setTextColor(Color.DKGRAY)
 
                     cardView.setOnClickListener {
-                        //Toast.makeText(this@GameActivity, "CardView" + i + "Clicked", Toast.LENGTH_SHORT).show()
                         flipped[i] = true
                         pictureView.setImageResource(R.drawable.logo)
                         val spannableString = SpannableString(chName)
@@ -344,7 +341,6 @@ class GameActivity : AppCompatActivity() {
                         textView.text = spannableString
                         textView.setTextColor(Color.rgb(255, 215, 0))
                         cardView.setOnClickListener(null)
-                        //cardView.setBackgroundResource(R.drawable.back)
 
                         if (mAuth.currentUser!!.uid == gameObj.player1) {
                             // prvom igracu povecaj ili smanji

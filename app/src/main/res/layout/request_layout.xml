@@ -46,19 +46,4 @@
             android:layout_marginRight="30dp"/>
     </LinearLayout>
 
-
-    <!--    <Button-->
-<!--        android:id="@+id/accept"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_next="@+id/req"-->
-<!--        android:text="Button" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/decline"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Button" />-->
-
-
 </RelativeLayout>

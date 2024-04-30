@@ -115,5 +115,3 @@
         android:text="Back to login page"
         />
 </RelativeLayout>
-
-    <!--        android:background="#FFD580"-->

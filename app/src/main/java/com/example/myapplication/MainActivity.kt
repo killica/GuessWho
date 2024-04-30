@@ -39,11 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var playerList: ArrayList<Player>
     private lateinit var requestList: ArrayList<Request>
     private lateinit var keyList: ArrayList<String>
-    //private lateinit var spinnerItemList: ArrayList<SpinnerItem>
-//    private lateinit var acceptList: ArrayList<Button>
-//    private lateinit var declineList: ArrayList<Button>
     private lateinit var adapter: RequestAdapter
-   // private lateinit var spinnerAdapter: SpinnerAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
     private lateinit var logoutButton: Button
@@ -68,9 +64,6 @@ class MainActivity : AppCompatActivity() {
 
         requestList = ArrayList()
         keyList = ArrayList()
-        //spinnerItemList = ArrayList()
-//        acceptList = ArrayList()
-//        declineList = ArrayList()
         requestRecyclerView = findViewById(R.id.request_list)
 
         requestRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -78,8 +71,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = RequestAdapter(this, requestList, playerList, keyList, mDbRef)
         requestRecyclerView.adapter = adapter
-        //spinnerAdapter = SpinnerAdapter(this, spinnerItemList)
-
 
         spinner = findViewById(R.id.spinner)
 
@@ -91,10 +82,6 @@ class MainActivity : AppCompatActivity() {
         adapterS.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapterS
         spinner.prompt = "Select your opponent"
-
-        //playerRecyclerView = findViewById(R.id.playerRecyclerView)
-        //playerRecyclerView.layoutManager = LinearLayoutManager(this)
-        //playerRecyclerView.adapter = adapter
 
         logoutButton = findViewById(R.id.logout)
         logoutButton.setOnClickListener {
@@ -194,12 +181,8 @@ class MainActivity : AppCompatActivity() {
                             startActivity(intent)
                             finish()
                         }
-//                        builder.setNegativeButton("Decline") { dialog, which ->
-//
-//                        }
                         val dialog = builder.create()
                         if (!this@MainActivity.isFinishing) {
-                            // Prikazivanje dijaloga
                             dialog.show()
                         }
 

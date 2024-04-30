@@ -3,7 +3,7 @@ package com.example.myapplication
 import com.google.firebase.database.IgnoreExtraProperties
 import kotlin.random.Random
 
-@IgnoreExtraProperties // Ignorise dodatna svojstva u klasi tokom serijalizacije
+@IgnoreExtraProperties
 data class Game(
     var player1: String? = null,
     var player2: String? = null,
