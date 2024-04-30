@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/text1"
+    style="?android:attr/dropDownItemStyle"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:textColor="#C04000"
+    android:fontFamily="@font/comicsans"
+    android:textSize="15sp"
+    android:textStyle="bold"
+    android:layout_centerVertical="true"
+    android:background="@drawable/spinner_item"
+    android:ellipsize="marquee" />

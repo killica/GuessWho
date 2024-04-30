@@ -27,7 +27,7 @@
         android:layout_below="@+id/welcome"
         android:layout_width="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:background="@drawable/spinner_background"
         android:entries="@array/spinner_items"
         android:layout_marginLeft="20dp"

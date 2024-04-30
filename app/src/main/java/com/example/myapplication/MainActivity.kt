@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -38,9 +39,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var playerList: ArrayList<Player>
     private lateinit var requestList: ArrayList<Request>
     private lateinit var keyList: ArrayList<String>
+    //private lateinit var spinnerItemList: ArrayList<SpinnerItem>
 //    private lateinit var acceptList: ArrayList<Button>
 //    private lateinit var declineList: ArrayList<Button>
     private lateinit var adapter: RequestAdapter
+   // private lateinit var spinnerAdapter: SpinnerAdapter
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
     private lateinit var logoutButton: Button
@@ -65,6 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         requestList = ArrayList()
         keyList = ArrayList()
+        //spinnerItemList = ArrayList()
 //        acceptList = ArrayList()
 //        declineList = ArrayList()
         requestRecyclerView = findViewById(R.id.request_list)
@@ -74,16 +78,17 @@ class MainActivity : AppCompatActivity() {
 
         adapter = RequestAdapter(this, requestList, playerList, keyList, mDbRef)
         requestRecyclerView.adapter = adapter
+        //spinnerAdapter = SpinnerAdapter(this, spinnerItemList)
 
 
         spinner = findViewById(R.id.spinner)
 
         val adapterS = ArrayAdapter<String>(
             this,
-            android.R.layout.simple_spinner_item,
+            R.layout.simple_spinner_item,
             mutableListOf("Select your opponent")
         )
-        adapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterS.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapterS
         spinner.prompt = "Select your opponent"
 
@@ -216,12 +221,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Opponent not selected!", Toast.LENGTH_SHORT).show()
             } else {
 
-                requestBtn.isEnabled = false
-
-                handler.postDelayed({
-                    requestBtn.isEnabled = true
-                }, 5000)
-
+                var found = false
                 val senderId = FirebaseAuth.getInstance().currentUser?.uid
                 var receiverId : String? = null
                 for (player in playerList) {
@@ -231,8 +231,34 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                val requestObject = Request(senderId, receiverId)
-                mDbRef.child("request").push().setValue(requestObject)
+                mDbRef.child("request").addValueEventListener(object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for(postSnapshot in snapshot.children) {
+                            val req = postSnapshot.getValue(Request::class.java)
+                            if(req!!.receiverId == receiverId && req.senderId == senderId && !found) {
+                                Toast.makeText(this@MainActivity, "Request already sent!", Toast.LENGTH_SHORT).show()
+                                found = true
+                                break
+                            }
+                        }
+                        if(!found) {
+                            found = true
+                            requestBtn.isEnabled = false
+                            requestBtn.setBackgroundResource(R.drawable.btn2_qt)
+                            handler.postDelayed({
+                                requestBtn.setBackgroundResource(R.drawable.btn_qt)
+                                requestBtn.isEnabled = true
+                            }, 5000)
+                            val requestObject = Request(senderId, receiverId)
+                            mDbRef.child("request").push().setValue(requestObject)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
             }
 
         }
