@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.View.OnTouchListener
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +29,7 @@ class SignUp : AppCompatActivity() {
     private lateinit var edtEmail: EditText
     private lateinit var edtPassword: EditText
     private lateinit var btnRegister: Button
+    private lateinit var back: TextView
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDbRef: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +48,7 @@ class SignUp : AppCompatActivity() {
         edtEmail = findViewById(R.id.email)
         edtPassword = findViewById(R.id.password)
         btnRegister = findViewById(R.id.register)
+        back = findViewById(R.id.go_back)
         var passwordVisible = false
         edtPassword.setOnTouchListener(object: OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -78,6 +82,12 @@ class SignUp : AppCompatActivity() {
 
             signUp(username, email, password)
 
+        }
+
+        back.setOnClickListener {
+            val intent = Intent(this, Login::class.java)
+            startActivity(intent)
+            finish()
         }
 
     }
@@ -114,6 +124,11 @@ class SignUp : AppCompatActivity() {
             }
         })
 
+
+    }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onBackPressed() {
 
     }
 
