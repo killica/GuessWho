@@ -17,7 +17,7 @@ For data storage, Firebase Realtime Database has been used.
 <!-- About authors -->
 <hr>
 
-# About autors
+# About authors
 Đurđa Milošević - djuki0904@gmail.com\
 Iva Milutinović - ivaivce76@gmail.com\
 Lazar Savić - lazarsavic2003@gmail.com
