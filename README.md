@@ -8,17 +8,16 @@ The goal is to narrow down the choice of possible characters by asking the oppon
 The entire application has been written in Kotlin in the Android Studio IDE.\
 For data storage, Firebase Realtime Database has been used.
 # Application interface and functionalities:
-## Log in page: 
-![login](https://github.com/killica/GuessWho/assets/149554252/367526d8-52a8-452e-9f4e-a2b21273fd85)
-## Sign up page:
-![signup](https://github.com/killica/GuessWho/assets/149554252/cf3c8a2b-7708-49d5-9fcf-d4c13ae2837b)
-## Home page:
-![requests](https://github.com/killica/GuessWho/assets/149554252/da108273-7111-43ce-991f-f744f6634d72)
-![spinner](https://github.com/killica/GuessWho/assets/149554252/f437c05c-7336-49c6-8ab5-64d5638af43c)
-## Gameplay:
-![game](https://github.com/killica/GuessWho/assets/149554252/5ce70ac9-5624-4c2b-a58d-847bbf7323a6)
-![game1](https://github.com/killica/GuessWho/assets/149554252/7bae9332-f4e0-4a01-9a1e-b12657feb7cf)
-# About authors
+<img src="https://github.com/killica/GuessWho/assets/149554252/7977c049-f026-4ccc-a76e-f227891e2894" alt="LogIn" width="200"/>
+<img src="https://github.com/killica/GuessWho/assets/149554252/97a4d4d9-7ec7-4ecf-b365-c078821b4f09" alt="SignUp" width="200"/>
+<img src="https://github.com/killica/GuessWho/assets/149554252/d793b358-ddd4-4832-b1ef-e8d4748fcdd5" alt="Main" width="200"/><br>
+<img src="https://github.com/killica/GuessWho/assets/149554252/65703c64-03ac-464d-a936-67a910a4fc72)" alt="Spinner" width="200"/>
+<img src="https://github.com/killica/GuessWho/assets/149554252/9258829f-c5ca-4065-abff-c4d9823c7531" alt="Game" width="200"/>
+<img src="https://github.com/killica/GuessWho/assets/149554252/87e94f54-8d27-4ba3-a6dd-a021d27307ee" alt="Game1" width="200"/>
+<!-- About authors -->
+<hr>
+
+# About autors
 Đurđa Milošević - djuki0904@gmail.com\
 Iva Milutinović - ivaivce76@gmail.com\
 Lazar Savić - lazarsavic2003@gmail.com
