@@ -15,6 +15,7 @@ import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.EditText
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -61,7 +62,8 @@ class GameActivity : AppCompatActivity() {
         var text: TextView = findViewById(R.id.tv)
         var gameObjRef = intent.getStringExtra("gameObj")
 
-
+        var guessText : EditText = findViewById(R.id.guess)
+        var guessBtn: Button = findViewById(R.id.guessBtn)
         var mDbRef = FirebaseDatabase.getInstance().getReference()
         mAuth = FirebaseAuth.getInstance()
         var gameObj: Game = Game()
@@ -231,6 +233,38 @@ class GameActivity : AppCompatActivity() {
             "n38" to "Miljana",
             "n39" to "Isak",
         )
+        guessBtn.setOnClickListener {
+
+            var opponentCard: Long = -1
+            if (mAuth.currentUser!!.uid == gameObj.player1) {
+                opponentCard = gameObj.player2image
+                val opponentCardName = "n$opponentCard"
+                val opponentCharacterName = characterNamesMap[opponentCardName]
+                if(guessText.text.toString() == opponentCharacterName) {
+                    gameObj.finish = 1
+                } else {
+                    gameObj.finish = 2
+                }
+            }
+            else {
+                opponentCard = gameObj.player1image
+                val opponentCardName = "n$opponentCard"
+                val opponentCharacterName = characterNamesMap[opponentCardName]
+                if(guessText.text.toString() == opponentCharacterName) {
+                    gameObj.finish = 2
+                } else {
+                    gameObj.finish = 1
+                }
+            }
+            mDbRef.child("game").child(gameObjRef!!).child("finish").setValue(gameObj.finish)
+                .addOnSuccessListener {
+                    Log.d(TAG, "Uspesno azurirana vrednost FINISHA")
+                }
+                .addOnFailureListener {
+                    Log.d(TAG, "Neuspesno azurirana vrednost FINISHA")
+                }
+
+        }
         mDbRef.child("game").child(gameObjRef!!)
             .get()
             .addOnSuccessListener { snapshot ->

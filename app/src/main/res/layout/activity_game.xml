@@ -19,43 +19,94 @@
         android:fontFamily="@font/comicsans"
         android:text="" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layout_card"
-        android:layout_width="150dp"
-        android:layout_height="180dp"
-        android:orientation="vertical"
-        android:layout_below="@+id/op"
-        android:layout_centerInParent="true"
+    <LinearLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/op"
+        android:orientation="horizontal"
         android:layout_marginTop="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="15dp"
+
         >
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/layout_card"
+            android:layout_width="150dp"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/op"
+            android:layout_marginLeft="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="15dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#eec64f">
+                <ImageView
+                    android:id="@+id/card"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="#eec64f">
-            <ImageView
-                android:id="@+id/card"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            >
 
             <TextView
-                android:id="@+id/tv"
-                android:layout_width="match_parent"
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/card"
+                android:layout_centerHorizontal="true"
                 android:textAlignment="center"
-                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textStyle="bold|italic"
+                android:textColor="#FFAA33"
+                android:text="Who is your character?" />
+            <EditText
+                android:id="@+id/guess"
+                android:layout_below="@id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:background="@drawable/edt_qt"
                 />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-
+            <Button
+                android:id="@+id/guessBtn"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/guess"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:text="Guess!"
+                android:background="@drawable/login_btn_qt"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textAllCaps="false"/>
+        </RelativeLayout>
+    </LinearLayout>
   <ScrollView
       android:id="@+id/scroll_view"
-      android:layout_below="@id/layout_card"
+      android:layout_below="@id/top"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginTop="20dp"
@@ -1021,5 +1072,6 @@
 
     </GridLayout>
     </ScrollView>
+
 
 </RelativeLayout>
