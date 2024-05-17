@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+
+    tools:context=".RulesActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="750dp"
+        android:id="@+id/rules"
+        >
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@color/white"
+            android:text="*Objective of the game:*\n\nTo be the first to guess the character your opponent has.\n*Rules of the game:*\n\n1. *Questions:* Players take turns asking questions to eliminate characters. Questions do not have to relate to physical characteristics (hair color, wearing glasses, etc.) and must be asked in a &quot;yes&quot; or &quot;no&quot; format.\n\nFor example: &quot;Does your character wear a hat?&quot; The opponent answers with &quot;yes&quot; or &quot;no.&quot;\n\n2. *Elimination:* Based on the opponent\'s answer, the player turns down the character cards that do not match the description. For example, if the answer to the hat question is &quot;no,&quot; all characters wearing a hat are turned down.\n\n\3. *Guessing:* When a player thinks they know which character the opponent has, they can make a guess instead of asking a question. If the guess is incorrect, the opponent wins. If the guess is correct, the guessing player wins. Additionally, if 23 cards are turned down, the game automatically ends. If the only card left turned up matches the opponent's character, the player automatically wins; otherwise, they automatically lose.\n\n*End of the game:*\n- The game ends when one player correctly guesses the opponent's character or when 23 cards are turned down.\n- If the guess is incorrect, the opponent automatically wins.\n\n*Notes:*\n- Players are not allowed to lie about the characteristics of their characters.\n- Think carefully about the questions to eliminate as many characters as quickly as possible.\n"
+
+            />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rules"
+        android:layout_centerHorizontal="true"
+        android:text="Back"
+        android:background="@drawable/login_btn_qt"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        android:layout_marginTop="20dp"
+        />
+
+</RelativeLayout>

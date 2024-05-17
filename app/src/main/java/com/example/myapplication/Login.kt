@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,7 @@ class Login : AppCompatActivity() {
     private lateinit var edtPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var btnSignup: Button
+    private lateinit var rulesTv : TextView
     private lateinit var mAuth: FirebaseAuth
 
 
@@ -40,6 +42,7 @@ class Login : AppCompatActivity() {
         edtPassword = findViewById(R.id.password)
         btnLogin = findViewById(R.id.login)
         btnSignup = findViewById(R.id.signup)
+        rulesTv = findViewById(R.id.rules)
         var passwordVisible = false
         edtPassword.setOnTouchListener(object: View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
@@ -67,6 +70,12 @@ class Login : AppCompatActivity() {
 
         btnSignup.setOnClickListener {
             val intent = Intent(this, SignUp::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        rulesTv.setOnClickListener {
+            val intent = Intent(this, RulesActivity::class.java)
             startActivity(intent)
             finish()
         }
