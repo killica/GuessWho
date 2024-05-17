@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -14,6 +15,8 @@ import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.GridLayout
@@ -28,6 +31,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.text.toLowerCase
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.marginLeft
@@ -240,7 +244,7 @@ class GameActivity : AppCompatActivity() {
                 opponentCard = gameObj.player2image
                 val opponentCardName = "n$opponentCard"
                 val opponentCharacterName = characterNamesMap[opponentCardName]
-                if(guessText.text.toString() == opponentCharacterName) {
+                if(guessText.text.toString().lowercase() == opponentCharacterName!!.lowercase()) {
                     gameObj.finish = 1
                 } else {
                     gameObj.finish = 2
@@ -250,7 +254,7 @@ class GameActivity : AppCompatActivity() {
                 opponentCard = gameObj.player1image
                 val opponentCardName = "n$opponentCard"
                 val opponentCharacterName = characterNamesMap[opponentCardName]
-                if(guessText.text.toString() == opponentCharacterName) {
+                if(guessText.text.toString().lowercase() == opponentCharacterName!!.lowercase()) {
                     gameObj.finish = 2
                 } else {
                     gameObj.finish = 1
@@ -300,10 +304,17 @@ class GameActivity : AppCompatActivity() {
 
                             val width = LinearLayout.LayoutParams.WRAP_CONTENT
                             val height = LinearLayout.LayoutParams.WRAP_CONTENT
-                            val focusable = false
-                            val popupWindow = PopupWindow(popupView, width, height, focusable)
+                            //val focusable = false
+                            val popupWindow = PopupWindow(popupView, width, height)
 
                             popupWindow.animationStyle = R.style.PopupAnimation
+                            guessBtn.isEnabled = false
+                            for(i in 0 until 24) {
+                                val cardKey = "card$i"
+                                var cardView : CardView = findViewById(cardsMap[cardKey]!!)
+                                cardView.isEnabled = false
+                            }
+                            guessText.isEnabled = false
                             val winnerInfo = popupView.findViewById<TextView>(R.id.info)
                             if(snapshot.value.toString() == "1") {
                                 if (mAuth.currentUser!!.uid == gameObj.player1) {
@@ -338,7 +349,18 @@ class GameActivity : AppCompatActivity() {
 
 
                             }
+                            popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                            popupWindow.setOutsideTouchable(true)
+
+                            popupWindow.setTouchInterceptor { _, event ->
+                                if (event.action == MotionEvent.ACTION_OUTSIDE) {
+                                    // Ignore outside touch events
+                                    true
+                                } else false
+                            }
+
                             popupWindow.showAtLocation(window.decorView, Gravity.CENTER, 0, 0)
+
                         }
                     }
 
