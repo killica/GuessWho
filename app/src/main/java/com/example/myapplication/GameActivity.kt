@@ -23,6 +23,7 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.RelativeLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -316,9 +317,14 @@ class GameActivity : AppCompatActivity() {
                             }
                             guessText.isEnabled = false
                             val winnerInfo = popupView.findViewById<TextView>(R.id.info)
+                            val backButton = popupView.findViewById<Button>(R.id.end_game)
+                            val pop = popupView.findViewById<RelativeLayout>(R.id.pop)
                             if(snapshot.value.toString() == "1") {
                                 if (mAuth.currentUser!!.uid == gameObj.player1) {
                                     // mi smo pobedili
+                                    backButton.setBackgroundResource(R.drawable.btn1_qt)
+                                    pop.setBackgroundResource(R.drawable.popup_qt2)
+                                    winnerInfo.setTextColor(this@GameActivity.resources.getColor(R.color.green2))
                                     winnerInfo.text = "Congratulations!\nYou won!"
                                 } else {
                                     //mi smo izgubili
@@ -327,13 +333,17 @@ class GameActivity : AppCompatActivity() {
                             } else {
                                 if (mAuth.currentUser!!.uid == gameObj.player2) {
                                     // mi smo pobedili
+                                    backButton.setBackgroundResource(R.drawable.btn1_qt)
+                                    pop.setBackgroundResource(R.drawable.popup_qt2)
+                                    winnerInfo.setTextColor(this@GameActivity.resources.getColor(R.color.green2))
                                     winnerInfo.text = "Congratulations!\nYou won!"
+
                                 } else {
                                     //mi smo izgubili
                                     winnerInfo.text = "Better luck\nnext time... :("
                                 }
                             }
-                            val backButton = popupView.findViewById<Button>(R.id.end_game)
+
                             backButton.setOnClickListener {
                                 popupWindow.dismiss()
                                 mDbRef.child("game").child(gameObjRef).removeValue().addOnCompleteListener { task ->

@@ -234,6 +234,7 @@ class MainActivity : AppCompatActivity() {
                             }, 5000)
                             val requestObject = Request(senderId, receiverId)
                             mDbRef.child("request").push().setValue(requestObject)
+                            Toast.makeText(this@MainActivity, "Request successfully sent!", Toast.LENGTH_SHORT).show()
                         }
                     }
 
