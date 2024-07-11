@@ -17,6 +17,9 @@ For data storage, Firebase Realtime Database has been used.
 <img src="https://github.com/killica/GuessWho/assets/149554252/79f25601-967b-4574-a779-580dac1c7320" alt="Game3" width="200"/>
 <img src="https://github.com/killica/GuessWho/assets/149554252/7401984c-2feb-4941-9253-d94d307092ec" alt="Game2" width="200"/>
 <img src="https://github.com/killica/GuessWho/assets/149554252/62513d24-8ccd-4669-a886-795176cae654" alt="Game4" width="200"/>
+
+# Presentation
+Presentation of the project is available [here](https://shorturl.at/ChHRy).
 <!-- About authors -->
 
 # About authors
